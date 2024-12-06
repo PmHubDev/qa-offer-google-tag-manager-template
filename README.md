@@ -45,7 +45,7 @@ SuperTag Template của Permate hỗ trợ chuẩn Google Tag template, là thư
   <li>Tại mục <b>Custom/Tuỳ chỉnh</b>, chọn vào <b>Custom HTML/HTML Tuỳ chỉnh</b>.</li>
 
   ![GTM_CustomHTML_View](https://github.com/user-attachments/assets/e085a442-ab8f-4925-91c8-2daa39218c7b)
-  <li>Tại mục <b>HTML</b>, bạn cần điền đoạn mã Javascript trong file <a><b>customScript.html</b></a> vào đây</li>
+  <li>Tại mục <b>HTML</b>, bạn cần điền đoạn mã Javascript trong file <a href="https://github.com/PmHubDev/qa-offer-google-tag-manager-template/blob/main/customScript.html"><b>customScript.html</b></a> vào đây</li>
 
   ![GTM_CustomHTML_Value](https://github.com/user-attachments/assets/ea7faeaf-45a5-411c-94e6-68753d12746e)
   <li>Thẻ này sẽ cần sử dụng Trigger kích hoạt tất cả sự kiện <b>DOM Ready/DOM Sẵn sàng</b> giống với <b>Permate SuperTag</b>.</li>
