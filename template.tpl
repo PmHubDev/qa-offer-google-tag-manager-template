@@ -17,7 +17,7 @@ ___INFO___
   "categories": ["AFFILIATE_MARKETING", "ADVERTISING", "ATTRIBUTION"],
   "brand": {
     "id": "brand_dummy",
-    "displayName": "Mẫu tùy chỉnh"
+    "displayName": ""
   },
   "description": "",
   "containerContexts": [
@@ -28,22 +28,7 @@ ___INFO___
 
 ___TEMPLATE_PARAMETERS___
 
-[
-  {
-    "type": "TEXT",
-    "name": "tracking_domain",
-    "simpleValueType": true,
-    "defaultValue": "https://qa.pmdevtk.com",
-    "displayName": "Tracking domain"
-  },
-  {
-    "type": "TEXT",
-    "name": "session_click",
-    "simpleValueType": true,
-    "defaultValue": 684000,
-    "displayName": "Session click"
-  }
-]
+[]
 
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
@@ -60,8 +45,8 @@ const getReferrerUrl = require('getReferrerUrl');
 const encodeUriComponent = require('encodeUriComponent');
 const callInWindow = require('callInWindow');
 
-const SESSION_CLICK = data.session_click || 684000;
-const TRACKING_DOMAIN = data.tracking_domain;
+const SESSION_CLICK = 684000;
+const TRACKING_DOMAIN = 'https://qa.pmdevtk.com';
 const SCRIPT_URL = TRACKING_DOMAIN + '/get_url';
 const COOKIES_EXPIRES = 604800; // 7 days
 const COOKIES_0_EXPIRES = 7776000; // 90 days
@@ -483,6 +468,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 12/6/2024, 10:45:23 AM
+Created on 12/6/2024, 4:04:14 PM
 
 
