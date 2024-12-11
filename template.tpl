@@ -65,6 +65,12 @@ function setPmOCookie(host, isSecure, data) {
     'max-age': COOKIES_0_EXPIRES,
     'secure': isSecure
   });
+  setCookie('pm_ss_o', '1', {
+    'domain': host,
+    'path': '/',
+    'max-age': SESSION_CLICK,
+    'secure': isSecure
+  });
 }
 
 function setFillParamsCookie(host, isSecure, fillParams) {
@@ -136,13 +142,6 @@ function processData() {
       }
     });
     return;
-  } else {
-    setCookie('pm_ss_o', '1', {
-      'domain': currentUrlObj.host,
-      'path': '/',
-      'max-age': SESSION_CLICK,
-      'secure': isSecure
-    });
   }
 
   let referrer = getReferrerUrl('queryParams');
