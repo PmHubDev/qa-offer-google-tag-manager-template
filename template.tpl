@@ -120,7 +120,7 @@ function processData() {
 
   // Get cep
   let cep = getCookieValues('pm_cep_o')[0];
-  if (cep && !cpId) {
+  if (cep && (!cpId || clId)) {
     let delimiter = currentUrl.indexOf('?') > -1 ? '&' : '?';
     currentUrl += delimiter + 'pm_cep=' + cep;
     pId = cep;
