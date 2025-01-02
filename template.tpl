@@ -121,7 +121,7 @@ function processData() {
   // Get cep
   let cep = getCookieValues('pm_cep_o')[0];
   if (cep && (!cpId || clId)) {
-    currentUrl += currentUrlObj.origin + currentUrlObj.pathname + '?pm_cep=' + cep;
+    currentUrl = currentUrlObj.origin + currentUrlObj.pathname + '?pm_cep=' + cep;
     pId = cep;
   } else if (cookieClickId) {
     var delimiter = currentUrl.indexOf('?') > -1 ? '&' : '?';
