@@ -1,5 +1,5 @@
 <script id="p-offer-script">
-    function pmReplaceUrl(cep, queryFilled, callback) {
+  function pmReplaceUrl(cep, queryFilled) {
       // Replace url
       var cepData =  {};
       try {
@@ -19,35 +19,40 @@
           isReplaceQuery = true;
           urlParams.set(key, cepData[key]);
         }
+        if (value === '{click_offer_id}' || value === '%7Bclick_offer_id%7D') {
+          isReplaceQuery = true;
+          urlParams.set(key, cepData['pm_click_id'] + '_a_' + cepData['pm_offer_id']);
+        }
         if (key === 'pm_cid' || key === 'pm_click_id' || key === 'pm_offer_id' || key === 'promo_code') {
           urlParams.delete(key);
         }
       });
       if (isReplaceQuery) {
-        callback(urlParams.toString());
         window.history.replaceState({}, '', window.location.pathname + '?' + decodeURIComponent(urlParams.toString()));
-        return;
+        return urlParams.toString();
       }
       if (queryFilled) {
         window.history.replaceState({}, '', window.location.href + (window.location.search ? '&' : '?')  + decodeURIComponent(queryFilled));
       }
+      return;
     }
   
-    function pmSendPixel(url, queryFilled, callback, queryCallback) {
+    function pmSendPixel(url, trackingCdn, queryFilled, callback, queryCallback) {
       fetch(url)
-        .then(function (result) {return result.text()})
-        .then(function(text) {
-          var cep = '';
-          var click_id = '';
-          var campaign = '';
-          var cepMatch = (text || '').match(/cep\s*:\s*"([^"]+)"/);
-          var clickIdMatch = (text || '').match(/click_id\s*:\s*"([^"]+)"/);
-          var campaignMatch = (text || '').match(/campaign\s*:\s*"([^"]+)"/);
-          if (cepMatch && cepMatch[1]) cep = cepMatch[1];
-          if (clickIdMatch && clickIdMatch[1]) click_id = clickIdMatch[1];
-          if (campaignMatch && campaignMatch[1]) campaign = campaignMatch[1];
-          var query = pmReplaceUrl(cep, queryFilled, queryCallback);
-          callback({cep: cep, click_id: click_id, campaign: campaign});
+        .then(function (result) {
+          return result.json()
+        })
+        .then(function(data) {
+          var replaceStr = pmReplaceUrl(data.cep, queryFilled);
+          if (replaceStr) {
+            queryCallback(replaceStr, data.cookies_expires)
+          }
+          callback(data);
+          var scriptCJ = document.createElement("script");
+          scriptCJ.defer = true;
+          scriptCJ.src = trackingCdn + '/cj.js?click_uuid=' + data.click_id + '&location=o&time=' + new Date().getTime();
+          document.body.appendChild(scriptCJ);
+
         });
     }
   </script>
