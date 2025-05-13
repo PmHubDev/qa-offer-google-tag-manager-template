@@ -48,11 +48,6 @@
             queryCallback(replaceStr, data.cookies_expires)
           }
           callback(data);
-          var scriptCJ = document.createElement("script");
-          scriptCJ.defer = true;
-          scriptCJ.src = trackingCdn + '/cj.js?click_uuid=' + data.click_id + '&location=o&time=' + new Date().getTime();
-          document.body.appendChild(scriptCJ);
-
         });
     }
   </script>
